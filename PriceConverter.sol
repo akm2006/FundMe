@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 
 pragma solidity 0.8.24;
-import {AggregatorV3Interface} from "@chainlink/contracts@1.4.0/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
+import {AggregatorV3Interface} from "./AggregatorV3Interface.sol";
 library PriceConverter{
     
     function getConversionRate(uint256 ethAmount) internal view returns(uint256){
@@ -12,8 +12,8 @@ library PriceConverter{
     }
 
     function getPrice() internal view returns(uint256) {
-
-      AggregatorV3Interface priceFeed = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
+      //ZKSync Sepolia testnet ETH/USD = 0xfEefF7c3fB57d18C5C6Cdd71e45D2D0b4F9377bF
+      AggregatorV3Interface priceFeed = AggregatorV3Interface(0xfEefF7c3fB57d18C5C6Cdd71e45D2D0b4F9377bF);
       (,int256 price,,,) = priceFeed.latestRoundData();
 
       return uint256( price *1e10);
